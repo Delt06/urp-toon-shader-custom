@@ -17,3 +17,8 @@ A collection of custom shaders made with [URP Toon Shader](https://github.com/De
 - Triplanar mapping
 
 ![Triplanar mapping](Documentation/triplanar_mapping.jpg)
+
+## Implementation
+
+The project uses custom shader generation functionality of URP Toon Shader.
+The original shader provides several points where code can be injected to, which allows implementing custom behavior on top of the base shader.
