@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d6cd861481d4b55b3652478146d0b38, type: 3}
+  m_Name: ToonShader_StylizedRamp
+  m_EditorClassIdentifier: 
+  SourceShader: {fileID: 4800000, guid: 849dc4ff793a3f943ad21a3b6ee26456, type: 3}
+  Shader: {fileID: 4800000, guid: 8d0a4835839a14940b28c882b4d6680d, type: 3}
+  ShaderName: Stylized Ramp
+  Properties:
+  - Name: _RampNoise
+    DisplayName: Ramp Noise
+    TypedValue:
+      Type: 2
+      IntegerValue: 0
+      FloatValue: 0
+      TextureValue: 3
+      RangeMinValue: 0
+      RangeMaxValue: 0
+      RangeValue: 0
+      VectorValue: {x: 0, y: 0, z: 0, w: 0}
+      ColorValue: {r: 0, g: 0, b: 0, a: 0}
+    Attributes: []
+  - Name: _RampNoiseIntensity
+    DisplayName: Ramp Noise Intensity
+    TypedValue:
+      Type: 9
+      IntegerValue: 0
+      FloatValue: 0
+      TextureValue: 2
+      RangeMinValue: 0
+      RangeMaxValue: 10
+      RangeValue: 0.1
+      VectorValue: {x: 0, y: 0, z: 0, w: 0}
+      ColorValue: {r: 0, g: 0, b: 0, a: 0}
+    Attributes: []
+  Hooks:
+  - Name: 0
+    Condition: 
+    Code: 'float _RampNoiseIntensity;
+
+      float4 _RampNoise_ST;'
+  - Name: 1
+    Condition: 
+    Code: 'TEXTURE2D(_RampNoise);
+
+      SAMPLER(sampler_RampNoise);'
+  - Name: 9
+    Condition: 
+    Code: 'half2 noise_uv = GetNormalizedScreenSpaceUV(position_cs);
+
+      noise_uv
+      = apply_tiling_offset(noise_uv, _RampNoise_ST);
+
+      noise_uv.x *= _ScreenParams.x
+      / _ScreenParams.y;
+
+      half noise = SAMPLE_TEXTURE2D(_RampNoise, sampler_RampNoise,
+      noise_uv);
+
+      noise = (noise * 2 - 1) * _RampNoiseIntensity;
+
+      brightness
+      += noise;'

@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d6cd861481d4b55b3652478146d0b38, type: 3}
+  m_Name: ToonShader_AdditiveMatcap
+  m_EditorClassIdentifier: 
+  SourceShader: {fileID: 4800000, guid: 849dc4ff793a3f943ad21a3b6ee26456, type: 3}
+  Shader: {fileID: 4800000, guid: 4d8c7a3ff33478145be407ed7fe420bd, type: 3}
+  ShaderName: Additive Matcap
+  Properties:
+  - Name: _MatcapTexture
+    DisplayName: Matcap
+    TypedValue:
+      Type: 2
+      IntegerValue: 0
+      FloatValue: 0
+      TextureValue: 1
+      RangeMinValue: 0
+      RangeMaxValue: 0
+      RangeValue: 0
+      VectorValue: {x: 0, y: 0, z: 0, w: 0}
+      ColorValue: {r: 0, g: 0, b: 0, a: 0}
+    Attributes:
+    - NoScaleOffset
+  Hooks:
+  - Name: 7
+    Condition: 
+    Code: 'half2 matcap_uv : MATCAP_UV;'
+  - Name: 1
+    Condition: 
+    Code: 'TEXTURE2D(_MatcapTexture);
+
+      SAMPLER(sampler_MatcapTexture);'
+  - Name: 2
+    Condition: 
+    Code: 'const half4 matcap_sample = SAMPLE_TEXTURE2D(_MatcapTexture, sampler_MatcapTexture,
+      input.matcap_uv);
+
+      albedo += matcap_sample;'
+  - Name: 8
+    Condition: 
+    Code: 'half2 matcap_uv = TransformWorldToViewDir(vertex_normal_inputs.normalWS).xy;
+
+      matcap_uv
+      = matcap_uv * 0.5 + 0.5;
+
+      output.matcap_uv = matcap_uv;'

@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d6cd861481d4b55b3652478146d0b38, type: 3}
+  m_Name: ToonShader_Triplanar
+  m_EditorClassIdentifier: 
+  SourceShader: {fileID: 4800000, guid: 849dc4ff793a3f943ad21a3b6ee26456, type: 3}
+  Shader: {fileID: 4800000, guid: 60e998601afcd074bad5823a9e6454c9, type: 3}
+  ShaderName: Triplanar
+  Properties:
+  - Name: _Y
+    DisplayName: Y
+    TypedValue:
+      Type: 2
+      IntegerValue: 0
+      FloatValue: 0
+      TextureValue: 0
+      RangeMinValue: 0
+      RangeMaxValue: 0
+      RangeValue: 0
+      VectorValue: {x: 0, y: 0, z: 0, w: 0}
+      ColorValue: {r: 0, g: 0, b: 0, a: 0}
+    Attributes:
+    - NoScaleOffset
+  - Name: _X
+    DisplayName: X
+    TypedValue:
+      Type: 2
+      IntegerValue: 0
+      FloatValue: 0
+      TextureValue: 0
+      RangeMinValue: 0
+      RangeMaxValue: 0
+      RangeValue: 0
+      VectorValue: {x: 0, y: 0, z: 0, w: 0}
+      ColorValue: {r: 0, g: 0, b: 0, a: 0}
+    Attributes:
+    - NoScaleOffset
+  - Name: _Z
+    DisplayName: Z
+    TypedValue:
+      Type: 2
+      IntegerValue: 0
+      FloatValue: 0
+      TextureValue: 0
+      RangeMinValue: 0
+      RangeMaxValue: 0
+      RangeValue: 0
+      VectorValue: {x: 0, y: 0, z: 0, w: 0}
+      ColorValue: {r: 0, g: 0, b: 0, a: 0}
+    Attributes:
+    - NoScaleOffset
+  Hooks:
+  - Name: 1
+    Condition: 
+    Code: 'TEXTURE2D(_Y);
+
+      SAMPLER(sampler_Y);
+
+      TEXTURE2D(_X);
+
+      SAMPLER(sampler_X);
+
+      TEXTURE2D(_Z);
+
+      SAMPLER(sampler_Z);'
+  - Name: 2
+    Condition: 
+    Code: 'float4 y_sample = SAMPLE_TEXTURE2D(_Y, sampler_Y, input.positionWSAndFogFactor.xz)
+      * abs(input.normalWS.y);
+
+      float4 x_sample = SAMPLE_TEXTURE2D(_X, sampler_X,
+      input.positionWSAndFogFactor.yz) * abs(input.normalWS.x);
+
+      float4 z_sample
+      = SAMPLE_TEXTURE2D(_Z, sampler_Z, input.positionWSAndFogFactor.xy) * abs(input.normalWS.z);
+
+      float3
+      tri_w = abs(input.normalWS);
+
+      albedo *= (y_sample * tri_w.y + x_sample
+      * tri_w.x + z_sample * tri_w.z);'
