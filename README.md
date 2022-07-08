@@ -7,8 +7,13 @@ A collection of custom shaders made with [URP Toon Shader](https://github.com/De
 ## List of custom shaders
 
 - Additive matcap
+
 ![Additive Matcap](Documentation/additive_matcap.jpg)
+
 - Hand-drawn ramp
+
 ![Hand-drawn ramp](Documentation/hand_drawn_ramp.jpg)
+
 - Triplanar mapping
+
 ![Triplanar mapping](Documentation/triplanar_mapping.jpg)
