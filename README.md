@@ -18,6 +18,10 @@ A collection of custom shaders made with [URP Toon Shader](https://github.com/De
 
 ![Triplanar mapping](Documentation/triplanar_mapping.jpg)
 
+- Vertex animation
+
+![Vertex animation](Documentation/vertex_animation.gif)
+
 ## Implementation
 
 The project uses custom shader generation functionality of URP Toon Shader.

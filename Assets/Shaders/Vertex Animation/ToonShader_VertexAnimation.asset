@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d6cd861481d4b55b3652478146d0b38, type: 3}
+  m_Name: ToonShader_VertexAnimation
+  m_EditorClassIdentifier: 
+  SourceShader: {fileID: 4800000, guid: 849dc4ff793a3f943ad21a3b6ee26456, type: 3}
+  Shader: {fileID: 4800000, guid: 675b5d3490a23e043b602d5dab83e888, type: 3}
+  ShaderName: Vertex Animation
+  Properties:
+  - Name: _FreqY
+    DisplayName: Frequency (Y)
+    TypedValue:
+      Type: 1
+      IntegerValue: 0
+      FloatValue: 10
+      TextureValue: 0
+      RangeMinValue: 0
+      RangeMaxValue: 0
+      RangeValue: 0
+      VectorValue: {x: 0, y: 0, z: 0, w: 0}
+      ColorValue: {r: 0, g: 0, b: 0, a: 0}
+    Attributes: []
+  - Name: _FreqX
+    DisplayName: Frequency (X)
+    TypedValue:
+      Type: 1
+      IntegerValue: 0
+      FloatValue: 15
+      TextureValue: 0
+      RangeMinValue: 0
+      RangeMaxValue: 0
+      RangeValue: 0
+      VectorValue: {x: 0, y: 0, z: 0, w: 0}
+      ColorValue: {r: 0, g: 0, b: 0, a: 0}
+    Attributes: []
+  - Name: _Amplitude
+    DisplayName: Amplitude
+    TypedValue:
+      Type: 1
+      IntegerValue: 0
+      FloatValue: 0.05
+      TextureValue: 0
+      RangeMinValue: 0
+      RangeMaxValue: 0
+      RangeValue: 0
+      VectorValue: {x: 0, y: 0, z: 0, w: 0}
+      ColorValue: {r: 0, g: 0, b: 0, a: 0}
+    Attributes: []
+  Hooks:
+  - Name: 3
+    Condition: 
+    Code: input.positionOS.xyz += input.normalOS * _Amplitude * sin(input.positionOS.y
+      * _FreqY + _Time.y) * cos(input.positionOS.x * _FreqX + _Time.y);
+  - Name: 0
+    Condition: 
+    Code: 'float _FreqY;
+
+      float _FreqX;
+
+      float _Amplitude;'
