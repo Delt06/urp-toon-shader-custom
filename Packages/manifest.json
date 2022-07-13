@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.deltation.toon-shader": "file:D:/Projects/ToonShader/Packages/com.deltation.toon-shader",
+    "com.deltation.toon-shader": "https://github.com/Delt06/urp-toon-shader.git?path=Packages/com.deltation.toon-shader",
     "com.unity.collab-proxy": "1.15.15",
     "com.unity.feature.development": "1.0.1",
     "com.unity.ide.rider": "3.0.13",
